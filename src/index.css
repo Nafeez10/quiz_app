@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body{
+    background: linear-gradient(rgba(175, 156, 243, 0) 7.92%, rgb(175, 156, 243) 86.48%);;
+  }
+}
