@@ -14,7 +14,7 @@ const Home = () =>{
                     <h2 className=" text-[#FF3B3F] text-4xl font-bold tracking-wide">Quiz</h2>
                 </div>
                 <div className="w-full px-10 mb-5">
-                    <button className="bg-[#FF3B3F] py-3 hover:brightness-90 transition rounded-full text-white w-full">
+                    <button className="main-btn">
                         Start
                     </button>
                 </div>
