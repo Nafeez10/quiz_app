@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const quizQaPostData = createAsyncThunk("quizTaken", async(payload)=>{
+export const quizQaPostData = createAsyncThunk("quizTaken", async(payload)=>{
     const payloadData = {
-        
+
     }
 })
 

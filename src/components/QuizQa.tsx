@@ -1,9 +1,17 @@
+import { useSelector } from "react-redux";
 import { celebrateSvg } from "../assets";
 import QaInfo from "./QaInfo";
 import Questions from "./Questions";
 import QuizPlayWrapper from "./QuizPlayWrapper";
+import { getQuestionsData, getQuestionsStatus } from "../slices/questionsSlice";
+import { useEffect, useState } from "react";
 
 const QuizQa = () =>{
+
+    const questionsData = useSelector(getQuestionsData);
+    const questionsStatus = useSelector(getQuestionsStatus);
+
+    const [ currentQaNo, setCurrentQaNo ] = useState<number>(1);
 
     return(
         <>
@@ -11,7 +19,11 @@ const QuizQa = () =>{
                 <div className="h-full w-full bo rder-2 bor der-black relative">
                     <QaInfo />
                     <div className="h-full w-full">
-                        <Questions />
+                        <Questions
+                            questions={questionsData}
+                            currentQaNo={currentQaNo}
+                            setCurrentQaNo={setCurrentQaNo}
+                        />
                     </div>
                 </div>  
             </QuizPlayWrapper>

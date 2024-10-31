@@ -1,8 +1,32 @@
+import { useDispatch, useSelector } from "react-redux";
+import { appStateType } from "../App";
 import { logo } from "../assets";
+import { DispatchType } from "../store/store";
+import { getQuestionsStatus, questionsData } from "../slices/questionsSlice";
+import toast from "react-hot-toast";
+import { changeAppState } from "../slices/appStateSlice";
 
 const Home = () =>{
 
-    const simp ='top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute'
+    const questionsIsLoading = useSelector(getQuestionsStatus);
+
+    const dispatch = useDispatch<DispatchType>();
+
+    const quizStartHandeler = async() =>{
+        try{
+            const response = await dispatch(questionsData()).unwrap();
+            dispatch(changeAppState('playing'));
+        }catch{
+            toast(
+                "Something went wrong!",
+                {
+                  duration: 2000,
+                }
+            );
+        }
+    }
+
+    // const simp ='top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute'
 
     return(
         <>
@@ -14,8 +38,10 @@ const Home = () =>{
                     <h2 className=" text-[#FF3B3F] text-4xl font-bold tracking-wide">Quiz</h2>
                 </div>
                 <div className="w-full px-10 mb-5">
-                    <button className="main-btn">
-                        Start
+                    <button onClick={quizStartHandeler} className="main-btn">
+                        {
+                            questionsIsLoading == "loading" ? "Loading..." : "Start"
+                        }
                     </button>
                 </div>
             </div>

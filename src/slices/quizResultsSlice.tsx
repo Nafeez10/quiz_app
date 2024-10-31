@@ -12,7 +12,7 @@ type dataType = [
 // Thus because i am using a free trial version for the mock api i can't have more than two endpoints 
 // so i've kept the total quiz taken value and the quiz results array values in a the same endpoint
 
-const quizTakenData = createAsyncThunk('quizResults/quizTakenData', async()=>{
+export const quizTakenData = createAsyncThunk('quizResults/quizTakenData', async()=>{
     const response = await fetch('https://672306c22108960b9cc66f68.mockapi.io/quiz/results');
     const data:dataType = await response.json();
     const noQuizTaken = data[0].quiz_taken;
