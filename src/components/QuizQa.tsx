@@ -8,7 +8,7 @@ const QuizQa = () =>{
     return(
         <>
             <QuizPlayWrapper>
-                <div className="h-full w-full border-2 border-black relative">
+                <div className="h-full w-full bo rder-2 bor der-black relative">
                     <QaInfo />
                     <div className="h-full w-full">
                         <Questions />

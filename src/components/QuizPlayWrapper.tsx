@@ -13,7 +13,7 @@ const QuizPlayWrapper = ({children}:propsType) =>{
                 <div className="">
                     <img className="w-full" src={celebrateSvg} alt="" />
                 </div>
-                <div className=" overflow-y-auto absolute bottom-0 bg-white w-full h-[80vh] rounded-t-3xl">
+                <div className=" absolute bottom-0 bg-white w-full h-[80vh] rounded-t-3xl">
                     {
                         children
                     }
