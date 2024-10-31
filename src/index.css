@@ -37,6 +37,13 @@
   .option-s{
     @apply  border-green-500 bg-white
   }
+
+  .gradient-text{
+    background: #CF2F17;
+    background: linear-gradient(to right, #CF2F17 0%, #FFE016 50%, #5ECF13 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 @layer utilities{
