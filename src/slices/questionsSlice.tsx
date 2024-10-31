@@ -7,7 +7,7 @@ const questionsData = createAsyncThunk("questions/questionsData",async()=>{
     return data;
 })
 
-type questionsType = {
+export type questionsType = {
     id: number,
     type: string,
     difficulty: string,
