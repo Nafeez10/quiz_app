@@ -7,14 +7,15 @@ import toast from "react-hot-toast";
 import { getCurrentQuizId, getPrevResponseData, getQaPostStatus, questionResponseType, quizPostPayloadType, quizQaPostData, quizQuestionType, scoreType } from "../slices/quizQaInfoPostSlice";
 import { DispatchType } from "../store/store";
 import { changeAppState, getAppState } from "../slices/appStateSlice";
-import { addResult, getQuizResults } from "../slices/quizResultsSlice";
+import { addResult, getQuizResults, setQuizFinalScore } from "../slices/quizResultsSlice";
 
 type propsType = {
     questions: questionsType[];
     currentQaNo: number;
     setCurrentQaNo: React.Dispatch<React.SetStateAction<number>>;
     quizQaResponseData: boolean[];
-    setQuizQaResponseData:React.Dispatch<React.SetStateAction<boolean[]>>
+    setQuizQaResponseData:React.Dispatch<React.SetStateAction<boolean[]>>;
+    questionLength:number
 }
 
 type tempType = {
@@ -23,7 +24,7 @@ type tempType = {
     checked: boolean;
 }
 
-const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData, setQuizQaResponseData}:propsType) =>{
+const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  quizQaResponseData, setQuizQaResponseData}:propsType) =>{
 
     const dispatch = useDispatch<DispatchType>();
 
@@ -115,16 +116,20 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
 
     const finalScoreHandeler = (isAnswerCorrect:boolean) =>{
         let finalScore = 0;
-        if(currentQaNo == 5){
+        if(currentQaNo == questionLength){
+            const singleQaPercent = parseFloat(((1 / questionLength ) * 100).toFixed(2));
+            console.log((1 / questionLength ) * 100,singleQaPercent,"heyy");
+
             allQaResults.forEach( result =>{
                 if(result){
-                    finalScore = finalScore + 20;
+                    // const temp = Math.round((currentQaNo / questionLength ) * 100);
+                    finalScore = finalScore + singleQaPercent;
                 }
             })
-            finalScore = isAnswerCorrect ? finalScore + 20 : finalScore;
+            finalScore = isAnswerCorrect ? finalScore + singleQaPercent : finalScore;
         }
         
-        return finalScore;
+        return parseFloat(finalScore.toFixed(0));
     }
 
     const nextBtnHandeler = async () =>{
@@ -160,7 +165,7 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
         ]
 
         const finalScore:scoreType = {
-            isAttendedAll: currentQaNo == 5 ? true : false ,
+            isAttendedAll: currentQaNo == questionLength ? true : false ,
             final_score_percent: finalScoreHandeler(isAnswerCorrect)
         } 
 
@@ -173,7 +178,8 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
         const payload:quizPostPayloadType = {
             quizQaNo: currentQaNo,
             quizId: currentQuizId,
-            payloadData
+            payloadData,
+            questionLength:questionLength
         }
 
         try {
@@ -184,12 +190,16 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
 
             dispatch(addResult(isAnswerCorrect));
 
-            if( currentQaNo < 5){
+            if( currentQaNo < questionLength){
                 setCurrentQaNo(currentQaNo + 1);
                 console.log(payload);
                 console.log(currentQaNo)
             }else{
                 dispatch(changeAppState('finished'));
+
+                const finalScore = finalScoreHandeler(isAnswerCorrect);
+
+                dispatch(setQuizFinalScore(finalScore));
             }
             
         } catch {
@@ -216,7 +226,7 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
                 <div className="mt-10 overflow-y-auto scroll-hidden flex flex-col gap-5 flex-grow">
                     {
                         qaOptions.map( option =>(
-                            <div key={option.id} className=" option option-n-s ">
+                            <div key={option.id} className={` option ${option.checked ? "option-s" : "option-n-s"} `}>
                                 <input checked={option.checked} onChange={()=>checkHandeler(option.id)} className=" checkbox-success [--chkbg:#41da6a] [--chkfg:white] checkbox bord er-2 border-neutral-400 rounded-full" type="checkbox" />
                                 <p>{option.option}</p>
                             </div>
@@ -227,7 +237,7 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
                     <button disabled={canHitNext} onClick={nextBtnHandeler} className="main-btn my-4 disabled:brightness-75 ">
                         {
                             // currentQaNo == 5 ? "Submit" : "Next"
-                            qaPostStatus == "loading" ? "Loading..." : currentQaNo == 5 ? "Submit" : "Next"
+                            qaPostStatus == "loading" ? "Loading..." : currentQaNo == questionLength ? "Submit" : "Next"
                         }
                     </button>
                 </div>

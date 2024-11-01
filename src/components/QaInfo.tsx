@@ -1,11 +1,12 @@
 type propsType = {
+    questionsLength:number;
     currentQaNo:number;
     setCurrentQaNo :React.Dispatch<React.SetStateAction<number>>;
 }
 
-const QaInfo = ({currentQaNo, setCurrentQaNo}:propsType) =>{
+const QaInfo = ({currentQaNo, setCurrentQaNo, questionsLength}:propsType) =>{
 
-    const qaAttemptedPercent = (currentQaNo / 5 ) * 100;
+    const qaAttemptedPercent = Math.round((currentQaNo / questionsLength ) * 100);
 
     return(
         <>
@@ -19,7 +20,7 @@ const QaInfo = ({currentQaNo, setCurrentQaNo}:propsType) =>{
                             </span>
                             <span className="text-slate-400 italic">/</span>
                             <span className=" text-slate-400 italic">
-                                5
+                                {questionsLength}
                             </span>
                         </h2>
                     </div>

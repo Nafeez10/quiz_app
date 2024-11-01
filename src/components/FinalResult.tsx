@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { guageSvg } from "../assets"
 import QuizPlayWrapper from "./QuizPlayWrapper"
-import { clearAllResultsData, getQuizResults } from "../slices/quizResultsSlice"
+import { clearAllResultsData, getQuizFinalScorePercent, getQuizResults } from "../slices/quizResultsSlice"
 import { DispatchType } from "../store/store"
 import { clearAllQuestionData } from "../slices/questionsSlice"
 import { clearAllQaInfoData } from "../slices/quizQaInfoPostSlice"
@@ -12,15 +12,16 @@ const FinalResult = () =>{
     const dispatch = useDispatch<DispatchType>();
 
     const finalResultArr = useSelector(getQuizResults);
+    const quizFinalScorePercent = useSelector(getQuizFinalScorePercent);
 
     let correctAnswers = 0;
-    let finalResultPercent = 0;
+    // let finalResultPercent = 0;
     let inCorrectAnswers = 0;
 
     finalResultArr.forEach( result =>{
         if(result){
             correctAnswers++;
-            finalResultPercent = finalResultPercent + 20;
+            // finalResultPercent = finalResultPercent + 20;
         }else{
             inCorrectAnswers++;
         }
@@ -60,7 +61,7 @@ const FinalResult = () =>{
     return(
         <>
             <QuizPlayWrapper>
-                <div className="px-10 overflow-y-auto scroll-hidden nunito-font text-black flex flex-col justify-between border-2 h-full">
+                <div className="px-10 overflow-y-auto scroll-hidden nunito-font text-black flex flex-col justify-between h-full">
                     <div>
                         <h2 className="mt-10 text-2xl tracking-wide text-center">Your Result</h2>
                         <div className="">
@@ -68,7 +69,7 @@ const FinalResult = () =>{
                                 <img className=" w-full" src={guageSvg} alt="" />
                                 <div className=" flex justify-center items-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full w-[65px] h-[65px] bg-white">
                                     <h3 className=" text-xl font-extrabold">
-                                        {finalResultPercent}%
+                                        {quizFinalScorePercent}%
                                     </h3>
                                 </div>
                             </div>

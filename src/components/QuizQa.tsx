@@ -20,6 +20,7 @@ const QuizQa = () =>{
             <QuizPlayWrapper>
                 <div className="h-full w-full bo rder-2 bor der-black relative">
                     <QaInfo
+                        questionsLength={questionsData.length}
                         currentQaNo={currentQaNo}
                         setCurrentQaNo={setCurrentQaNo}
                     />
@@ -30,6 +31,7 @@ const QuizQa = () =>{
                             setCurrentQaNo={setCurrentQaNo}
                             quizQaResponseData={quizQaResponseData}
                             setQuizQaResponseData={setQuizQaResponseData}
+                            questionLength={questionsData.length}
                         />
                     </div>
                 </div>  

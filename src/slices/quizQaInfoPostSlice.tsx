@@ -8,6 +8,7 @@ export type quizPostPayloadType = {
     quizQaNo: number;
     payloadData: quizQuestionType;
     quizId?:string;
+    questionLength:number
 }
 
 type quizQaPostPayloadData = quizQuestionType & {
@@ -20,13 +21,15 @@ export const quizQaPostData = createAsyncThunk("quizQaPost/quizQaPostData", asyn
     const quizQaNo = payload.quizQaNo;
     const payloadData = payload.payloadData;
     const currentQuizId = payload.quizId;
+    const questionsLength = payload.questionLength;
+
     if(quizQaNo == 1){
         const response = await axiosApi.post('/results',payloadData);
         const data = await response.data;
         console.log(data);
         return data;
     }
-    else if(quizQaNo == 5){
+    else if(quizQaNo == questionsLength){
         const patchQuestionResponse = {
             question_response: payloadData.question_response,
             final_score: payloadData.final_score
