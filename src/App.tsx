@@ -29,7 +29,7 @@ function App() {
     return (
         <>  
             <Toaster />
-            <main className=' w-[30%] lg:w-[35%] md:w-[50%] sm:w-[70%] max-sm:w-full h-screen mx-auto'>
+            <main className='bg-app-gradient sm:rounded-lg w-[30%] lg:w-[35%] md:w-[50%] sm:w-[70%] max-sm:w-full sm:border-[3px] border-[#af9cf3] h-screen mx-auto overflow-hidden'>
                 <section className='h-full w-full'>
                     {
                         displayAppUI   

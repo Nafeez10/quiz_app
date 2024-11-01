@@ -217,22 +217,35 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
 
     const canHitNext = qaPostStatus == "loading" ? true : false;
 
+    // const questionImageElement = (
+    //     <img className="w-[50%] mx-auto mb-5 rounded-md" src={currentQuestion.imageUrl} alt="" />
+    // )
+
     return(
         <>
             <div className="pt-14 mx-auto px-5 flex flex-col h-full ">
                 <h3 className=" text-black nunito-font text-xl">
                     { currentQuestion.question }
                 </h3>
-                <div className="mt-10 overflow-y-auto scroll-hidden flex flex-col gap-5 flex-grow">
+                <div className=" mt-10 overflow-y-auto scroll-hidden">
                     {
-                        qaOptions.map( option =>(
-                            <div key={option.id} className={` option ${option.checked ? "option-s" : "option-n-s"} `}>
-                                <input checked={option.checked} onChange={()=>checkHandeler(option.id)} className=" checkbox-success [--chkbg:#41da6a] [--chkfg:white] checkbox bord er-2 border-neutral-400 rounded-full" type="checkbox" />
-                                <p>{option.option}</p>
-                            </div>
-                        ))
+                        currentQuestion.imageUrl ? 
+                            <img className="w-[50%] mx-auto mb-5 rounded-md" src={currentQuestion.imageUrl} alt="" />
+                            : 
+                            <></>
                     }
+                    <div className=" flex flex-col gap-5 flex-grow">
+                        {
+                            qaOptions.map( option =>(
+                                <div key={option.id} className={` option ${option.checked ? "option-s" : "option-n-s"} `}>
+                                    <input checked={option.checked} onChange={()=>checkHandeler(option.id)} className=" checkbox-success [--chkbg:#41da6a] [--chkfg:white] checkbox bord er-2 border-neutral-400 rounded-full" type="checkbox" />
+                                    <p>{option.option}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
+                
                 <div className="">
                     <button disabled={canHitNext} onClick={nextBtnHandeler} className="main-btn my-4 disabled:brightness-75 ">
                         {

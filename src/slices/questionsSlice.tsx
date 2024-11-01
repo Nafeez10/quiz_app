@@ -27,7 +27,8 @@ export type questionsType = {
     question: string,
     correct_answer: string[],
     incorrect_answers: string[],
-    options: string[]
+    options: string[],
+    imageUrl: string;
 }
 
 type initialStateType = {
