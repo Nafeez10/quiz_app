@@ -1,20 +1,21 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
+import axiosApi from "../axiosApi/axiosApi";
 
-type qaType = {
-    id: number;
-    category: string;
-    correct_answer: string[];
-    difficulty: string;
-    incorrect_answer: string[];
-    options: string[];
-    question: string;
-    type: string;
-}
+// type qaType = {
+//     id: number;
+//     category: string;
+//     correct_answer: string[];
+//     difficulty: string;
+//     incorrect_answer: string[];
+//     options: string[];
+//     question: string;
+//     type: string;
+// }
 
 export const questionsData = createAsyncThunk("questions/questionsData",async()=>{
-    const respons = await fetch('https://672306c22108960b9cc66f68.mockapi.io/quiz/questions')
-    const data:questionsType[] = await respons.json();
+    const respons = await axiosApi.get('/questions');
+    const data:questionsType[] = await respons.data;
     return data;
 })
 
@@ -45,7 +46,11 @@ const questionsSlice = createSlice({
     name:"questions",
     initialState,
     reducers:{
-
+        clearAllQuestionData(state){
+            state.isError = ''
+            state.questions = []
+            state.status = 'idle'
+        }
     },
     extraReducers(builder) {
         builder
@@ -65,8 +70,10 @@ const questionsSlice = createSlice({
     },
 })
 
+export const { clearAllQuestionData } = questionsSlice.actions;
+
 export const getQuestionsData = (state:RootState) => state.qustions.questions;
 export const getQuestionsStatus = (state:RootState) => state.qustions.status;
 export const getQuestionError = (state:RootState) => state.qustions.isError;
 
-export default questionsSlice.reducer
+export default questionsSlice.reducer;

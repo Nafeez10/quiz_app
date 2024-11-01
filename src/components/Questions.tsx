@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 import { questionsType } from "../slices/questionsSlice";
 import useTimer from "../hooks/useTimer";
+import { useDispatch, useSelector } from "react-redux";
+// import { getQuizResultsStatus } from "../slices/quizResultsSlice";
+import toast from "react-hot-toast";
+import { getCurrentQuizId, getPrevResponseData, questionResponseType, quizPostPayloadType, quizQaPostData, quizQuestionType, scoreType } from "../slices/quizQaInfoPostSlice";
+import { DispatchType } from "../store/store";
+import { changeAppState, getAppState } from "../slices/appStateSlice";
+import { addResult, getQuizResults } from "../slices/quizResultsSlice";
 
 type propsType = {
     questions: questionsType[];
     currentQaNo: number;
     setCurrentQaNo: React.Dispatch<React.SetStateAction<number>>;
+    quizQaResponseData: boolean[];
+    setQuizQaResponseData:React.Dispatch<React.SetStateAction<boolean[]>>
 }
 
 type tempType = {
@@ -14,16 +23,29 @@ type tempType = {
     checked: boolean;
 }
 
-const Questions = ({ questions, currentQaNo, setCurrentQaNo}:propsType) =>{
-    const [ currentQuestion, setCurrentQuestion ] = useState<questionsType>(questions[currentQaNo - 1]);
+const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData, setQuizQaResponseData}:propsType) =>{
+
+    const dispatch = useDispatch<DispatchType>();
+
+    const allQaResults = useSelector(getQuizResults);
+
+    const currentQuizId = useSelector(getCurrentQuizId);
+    const prevQaResponse = useSelector(getPrevResponseData);
+
+    const [ currentQuestion, setCurrentQuestion ] = useState<questionsType>(questions[0]);
     const [ qaOptions, setQaOptions ] = useState<tempType[]>([]);
     const [ selectedOptions, setSelectedOptions ] = useState<string[]>([]);
+    // const quizTaken = useSelector(getQuizResultsQuizTaken);
+    // const quizTakenStatus = useSelector(getQuizResultsStatus);
 
-    // const timeTaken = useTimer(currentQaNo);
-    // console.log(timeTaken)
-    // const [ isAnswerCorrect, setIsAnswerCorrect ] = useState(false); 
+    const timeTaken = useTimer(currentQaNo);
 
-    // console.log(currentQuestion)
+    useEffect(()=>{
+        if(currentQaNo > 1){
+            setCurrentQuestion(questions[currentQaNo - 1])
+        }
+        
+    },[currentQaNo])
 
     useEffect(()=>{
         const temp:tempType[] = currentQuestion.options.map((option, i) =>({
@@ -46,34 +68,6 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo}:propsType) =>{
         setSelectedOptions(tempSelected);
         // console.log(selectedOptions)
     },[qaOptions])
-
-    // useEffect(()=>{
-    //     const correctAnswerOptions = currentQuestion.correct_answer;
-    //     // console.log(correctAnswerOptions.length)
-    //     if(selectedOptions.length == correctAnswerOptions.length){
-    //         const checkIsCorrectArray = selectedOptions.map( option =>{
-    //             if(correctAnswerOptions.includes(option)){
-    //                 return true
-    //             }
-    //             else{
-    //                 return false
-    //             }
-    //         });
-
-    //         const checkIsCorrect = checkIsCorrectArray.every( option => option == true);
-
-    //         if(checkIsCorrect){
-    //             setIsAnswerCorrect(true);
-    //             console.log(true,"mmm")
-    //         }else{
-    //             setIsAnswerCorrect(false);
-    //         }
-    //     }else{
-    //         setIsAnswerCorrect(false);
-    //     }
-    // },[qaOptions, selectedOptions])
-
-    // console.log(selectedOptions)
 
     const checkIsAnswerCorrectHandeler = () =>{
         let isCorrect = false;
@@ -118,9 +112,94 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo}:propsType) =>{
         setQaOptions(temp);
     }
 
-    const nextBtnHandeler = () =>{
+    const finalScoreHandeler = (isAnswerCorrect:boolean) =>{
+        let finalScore = 0;
+        if(currentQaNo == 5){
+            allQaResults.forEach( result =>{
+                if(result){
+                    finalScore = finalScore + 20;
+                }
+            })
+            finalScore = isAnswerCorrect ? finalScore + 20 : finalScore;
+        }
+        
+        return finalScore;
+    }
+
+    const nextBtnHandeler = async () =>{
+        if(!selectedOptions.length){
+            toast(
+                "Select atleast one option",
+                {
+                  duration: 2000,
+                }
+            );
+
+            return;
+        }
+
         const isAnswerCorrect = checkIsAnswerCorrectHandeler();
-        console.log(isAnswerCorrect)
+        console.log(isAnswerCorrect);
+        
+        const correctAnswerOptions = currentQuestion.correct_answer;
+
+        const currentQaData:questionResponseType = {
+            question_no: currentQaNo,
+            quiz_question_data: currentQuestion,
+            time_taken_seconds: timeTaken,
+            choices_selected: selectedOptions,
+            user_attended_details: {
+                is_correct: isAnswerCorrect,
+                correct_choice: correctAnswerOptions,
+            }
+        }
+
+        const questionData: questionResponseType[] = [
+            ...prevQaResponse, currentQaData
+        ]
+
+        const finalScore:scoreType = {
+            isAttendedAll: currentQaNo == 5 ? true : false ,
+            final_score_percent: finalScoreHandeler(isAnswerCorrect)
+        } 
+
+        const payloadData:quizQuestionType = {
+            // id: currentQaNo,
+            question_response:questionData,
+            final_score: finalScore
+        }
+
+        const payload:quizPostPayloadType = {
+            quizQaNo: currentQaNo,
+            quizId: currentQuizId,
+            payloadData
+        }
+
+        try {
+            const response = await dispatch(quizQaPostData(payload)).unwrap();
+            // setQuizQaResponseData([
+            //     ...quizQaResponseData, isAnswerCorrect
+            // ])
+
+            dispatch(addResult(isAnswerCorrect));
+
+            if( currentQaNo < 5){
+                setCurrentQaNo(currentQaNo + 1);
+                console.log(payload);
+                console.log(currentQaNo)
+            }else{
+                dispatch(changeAppState('finished'));
+            }
+            
+        } catch {
+            toast(
+                "Somethind went wrong!",
+                {
+                    duration: 2000,
+                }
+            );
+        }
+
     }
 
     // console.log(isAnswerCorrect, "is correct")
@@ -143,7 +222,9 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo}:propsType) =>{
                 </div>
                 <div className="">
                     <button onClick={nextBtnHandeler} className="main-btn my-4 ">
-                        Next
+                        {
+                            currentQaNo == 5 ? "Submit" : "Next"
+                        }
                     </button>
                 </div>
             </div>

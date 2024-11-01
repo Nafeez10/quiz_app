@@ -11,6 +11,7 @@ const useTimer = (dependent:any) =>{
 
         return ()=>{
             clearInterval(timer);
+            setTimeTaken(0);
         }
     },[dependent])
 

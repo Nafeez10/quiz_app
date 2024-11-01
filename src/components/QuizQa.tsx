@@ -5,6 +5,7 @@ import Questions from "./Questions";
 import QuizPlayWrapper from "./QuizPlayWrapper";
 import { getQuestionsData, getQuestionsStatus } from "../slices/questionsSlice";
 import { useEffect, useState } from "react";
+import { quizQuestionType } from "../slices/quizQaInfoPostSlice";
 
 const QuizQa = () =>{
 
@@ -12,17 +13,23 @@ const QuizQa = () =>{
     const questionsStatus = useSelector(getQuestionsStatus);
 
     const [ currentQaNo, setCurrentQaNo ] = useState<number>(1);
+    const [ quizQaResponseData, setQuizQaResponseData ] = useState<boolean[]>([]);
 
     return(
         <>
             <QuizPlayWrapper>
                 <div className="h-full w-full bo rder-2 bor der-black relative">
-                    <QaInfo />
+                    <QaInfo
+                        currentQaNo={currentQaNo}
+                        setCurrentQaNo={setCurrentQaNo}
+                    />
                     <div className="h-full w-full">
                         <Questions
                             questions={questionsData}
                             currentQaNo={currentQaNo}
                             setCurrentQaNo={setCurrentQaNo}
+                            quizQaResponseData={quizQaResponseData}
+                            setQuizQaResponseData={setQuizQaResponseData}
                         />
                     </div>
                 </div>  

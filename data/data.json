@@ -1,109 +1,469 @@
 {
-    "questions": [
-        {   
-            "id":1,
+  "questions": [
+    {
+      "id": 1,
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science: Computers",
+      "question": "If you were to code software in this language you&#039;d only be able to type 0&#039;s and 1&#039;s.",
+      "correct_answer": [
+        "Binary"
+      ],
+      "incorrect_answers": [
+        "JavaScript",
+        "C++",
+        "Python"
+      ],
+      "options": [
+        "JavaScript",
+        "C++",
+        "Binary",
+        "Python"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science: Computers",
+      "question": "What is the code name for the mobile operating system Android 7.0?",
+      "correct_answer": [
+        "Nougat"
+      ],
+      "incorrect_answers": [
+        "Ice Cream Sandwich",
+        "Jelly Bean",
+        "Marshmallow"
+      ],
+      "options": [
+        "Nougat",
+        "Ice Cream Sandwich",
+        "Jelly Bean",
+        "Marshmallow"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science: Computers",
+      "question": "What does the &quot;MP&quot; stand for in MP3?",
+      "correct_answer": [
+        "Moving Picture"
+      ],
+      "incorrect_answers": [
+        "Music Player",
+        "Multi Pass",
+        "Micro Point"
+      ],
+      "options": [
+        "Music Player",
+        "Multi Pass",
+        "Micro Point",
+        "Moving Picture"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science: Computers",
+      "question": "What does CPU stand for?",
+      "correct_answer": [
+        "Central Processing Unit"
+      ],
+      "incorrect_answers": [
+        "Central Process Unit",
+        "Computer Personal Unit",
+        "Central Processor Unit"
+      ],
+      "options": [
+        "Central Process Unit",
+        "Central Processing Unit",
+        "Computer Personal Unit",
+        "Central Processor Unit"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science: Computers",
+      "question": "Which company was established on April 1st, 1976 by Steve Jobs, Steve Wozniak and Ronald Wayne?",
+      "correct_answer": [
+        "Apple"
+      ],
+      "incorrect_answers": [
+        "Microsoft",
+        "Atari",
+        "Commodore"
+      ],
+      "options": [
+        "Apple",
+        "Microsoft",
+        "Atari",
+        "Commodore"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "question_response": [
+        {
+          "question_no": 1,
+          "quiz_question_data": {
+            "id": 1,
             "type": "multiple",
             "difficulty": "easy",
             "category": "Science: Computers",
             "question": "If you were to code software in this language you&#039;d only be able to type 0&#039;s and 1&#039;s.",
-            "correct_answer": "Binary",
-            "incorrect_answers": [
-                "JavaScript",
-                "C++",
-                "Python"
+            "correct_answer": [
+              "Binary"
             ],
-            "options":[
-                "JavaScript",
-                "C++",
-                "Binary",
-                "Python"
+            "incorrect_answers": [
+              "JavaScript",
+              "C++",
+              "Python"
+            ],
+            "options": [
+              "JavaScript",
+              "C++",
+              "Binary",
+              "Python"
             ]
+          },
+          "time_taken_seconds": 3,
+          "choices_selected": [
+            "Binary"
+          ],
+          "user_attended_details": {
+            "is_correct": true,
+            "correct_choice": [
+              "Binary"
+            ]
+          }
         },
         {
-            "id":2,
+          "question_no": 2,
+          "quiz_question_data": {
+            "id": 2,
             "type": "multiple",
             "difficulty": "easy",
             "category": "Science: Computers",
             "question": "What is the code name for the mobile operating system Android 7.0?",
-            "correct_answer": "Nougat",
-            "incorrect_answers": [
-                "Ice Cream Sandwich",
-                "Jelly Bean",
-                "Marshmallow"
+            "correct_answer": [
+              "Nougat"
             ],
-            "options":[
-                "Nougat",
-                "Ice Cream Sandwich",
-                "Jelly Bean",
-                "Marshmallow"
+            "incorrect_answers": [
+              "Ice Cream Sandwich",
+              "Jelly Bean",
+              "Marshmallow"
+            ],
+            "options": [
+              "Nougat",
+              "Ice Cream Sandwich",
+              "Jelly Bean",
+              "Marshmallow"
             ]
+          },
+          "time_taken_seconds": 11,
+          "choices_selected": [
+            "Nougat"
+          ],
+          "user_attended_details": {
+            "is_correct": true,
+            "correct_choice": [
+              "Nougat"
+            ]
+          }
         },
         {
-            "id":3,
+          "question_no": 3,
+          "quiz_question_data": {
+            "id": 3,
             "type": "multiple",
             "difficulty": "easy",
             "category": "Science: Computers",
             "question": "What does the &quot;MP&quot; stand for in MP3?",
-            "correct_answer": "Moving Picture",
-            "incorrect_answers": [
-                "Music Player",
-                "Multi Pass",
-                "Micro Point"
+            "correct_answer": [
+              "Moving Picture"
             ],
-            "options":[
-                "Music Player",
-                "Multi Pass",
-                "Micro Point",
-                "Moving Picture"
+            "incorrect_answers": [
+              "Music Player",
+              "Multi Pass",
+              "Micro Point"
+            ],
+            "options": [
+              "Music Player",
+              "Multi Pass",
+              "Micro Point",
+              "Moving Picture"
             ]
+          },
+          "time_taken_seconds": 9,
+          "choices_selected": [
+            "Micro Point"
+          ],
+          "user_attended_details": {
+            "is_correct": false,
+            "correct_choice": [
+              "Moving Picture"
+            ]
+          }
         },
         {
-            "id":4,
+          "question_no": 4,
+          "quiz_question_data": {
+            "id": 4,
             "type": "multiple",
             "difficulty": "easy",
             "category": "Science: Computers",
             "question": "What does CPU stand for?",
-            "correct_answer": "Central Processing Unit",
-            "incorrect_answers": [
-                "Central Process Unit",
-                "Computer Personal Unit",
-                "Central Processor Unit"
+            "correct_answer": [
+              "Central Processing Unit"
             ],
-            "options":[
-                "Central Process Unit",
-                "Central Processing Unit",
-                "Computer Personal Unit",
-                "Central Processor Unit"
+            "incorrect_answers": [
+              "Central Process Unit",
+              "Computer Personal Unit",
+              "Central Processor Unit"
+            ],
+            "options": [
+              "Central Process Unit",
+              "Central Processing Unit",
+              "Computer Personal Unit",
+              "Central Processor Unit"
             ]
+          },
+          "time_taken_seconds": 4,
+          "choices_selected": [
+            "Central Processing Unit"
+          ],
+          "user_attended_details": {
+            "is_correct": true,
+            "correct_choice": [
+              "Central Processing Unit"
+            ]
+          }
         },
         {
-            "id":5,
+          "question_no": 5,
+          "quiz_question_data": {
+            "id": 5,
             "type": "multiple",
             "difficulty": "easy",
             "category": "Science: Computers",
             "question": "Which company was established on April 1st, 1976 by Steve Jobs, Steve Wozniak and Ronald Wayne?",
-            "correct_answer": "Apple",
-            "incorrect_answers": [
-                "Microsoft",
-                "Atari",
-                "Commodore"
+            "correct_answer": [
+              "Apple"
             ],
-            "options":[
-                "Apple",
-                "Microsoft",
-                "Atari",
-                "Commodore"
+            "incorrect_answers": [
+              "Microsoft",
+              "Atari",
+              "Commodore"
+            ],
+            "options": [
+              "Apple",
+              "Microsoft",
+              "Atari",
+              "Commodore"
             ]
+          },
+          "time_taken_seconds": 9,
+          "choices_selected": [
+            "Apple"
+          ],
+          "user_attended_details": {
+            "is_correct": true,
+            "correct_choice": [
+              "Apple"
+            ]
+          }
         }
-    ],
-
-    "results":[
+      ],
+      "final_score": {
+        "isAttendedAll": true,
+        "final_score_percent": 80
+      },
+      "id": 1
+    },
+    {
+      "question_response": [
         {
-            "quiz_taken":0,
-            "quiz_results":[
-                
+          "question_no": 1,
+          "quiz_question_data": {
+            "id": 1,
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Science: Computers",
+            "question": "If you were to code software in this language you&#039;d only be able to type 0&#039;s and 1&#039;s.",
+            "correct_answer": [
+              "Binary"
+            ],
+            "incorrect_answers": [
+              "JavaScript",
+              "C++",
+              "Python"
+            ],
+            "options": [
+              "JavaScript",
+              "C++",
+              "Binary",
+              "Python"
             ]
+          },
+          "time_taken_seconds": 5,
+          "choices_selected": [
+            "Python"
+          ],
+          "user_attended_details": {
+            "is_correct": false,
+            "correct_choice": [
+              "Binary"
+            ]
+          }
+        },
+        {
+          "question_no": 2,
+          "quiz_question_data": {
+            "id": 2,
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Science: Computers",
+            "question": "What is the code name for the mobile operating system Android 7.0?",
+            "correct_answer": [
+              "Nougat"
+            ],
+            "incorrect_answers": [
+              "Ice Cream Sandwich",
+              "Jelly Bean",
+              "Marshmallow"
+            ],
+            "options": [
+              "Nougat",
+              "Ice Cream Sandwich",
+              "Jelly Bean",
+              "Marshmallow"
+            ]
+          },
+          "time_taken_seconds": 3,
+          "choices_selected": [
+            "Jelly Bean"
+          ],
+          "user_attended_details": {
+            "is_correct": false,
+            "correct_choice": [
+              "Nougat"
+            ]
+          }
+        },
+        {
+          "question_no": 3,
+          "quiz_question_data": {
+            "id": 3,
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Science: Computers",
+            "question": "What does the &quot;MP&quot; stand for in MP3?",
+            "correct_answer": [
+              "Moving Picture"
+            ],
+            "incorrect_answers": [
+              "Music Player",
+              "Multi Pass",
+              "Micro Point"
+            ],
+            "options": [
+              "Music Player",
+              "Multi Pass",
+              "Micro Point",
+              "Moving Picture"
+            ]
+          },
+          "time_taken_seconds": 2,
+          "choices_selected": [
+            "Multi Pass"
+          ],
+          "user_attended_details": {
+            "is_correct": false,
+            "correct_choice": [
+              "Moving Picture"
+            ]
+          }
+        },
+        {
+          "question_no": 4,
+          "quiz_question_data": {
+            "id": 4,
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Science: Computers",
+            "question": "What does CPU stand for?",
+            "correct_answer": [
+              "Central Processing Unit"
+            ],
+            "incorrect_answers": [
+              "Central Process Unit",
+              "Computer Personal Unit",
+              "Central Processor Unit"
+            ],
+            "options": [
+              "Central Process Unit",
+              "Central Processing Unit",
+              "Computer Personal Unit",
+              "Central Processor Unit"
+            ]
+          },
+          "time_taken_seconds": 4,
+          "choices_selected": [
+            "Central Processing Unit"
+          ],
+          "user_attended_details": {
+            "is_correct": true,
+            "correct_choice": [
+              "Central Processing Unit"
+            ]
+          }
+        },
+        {
+          "question_no": 5,
+          "quiz_question_data": {
+            "id": 5,
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Science: Computers",
+            "question": "Which company was established on April 1st, 1976 by Steve Jobs, Steve Wozniak and Ronald Wayne?",
+            "correct_answer": [
+              "Apple"
+            ],
+            "incorrect_answers": [
+              "Microsoft",
+              "Atari",
+              "Commodore"
+            ],
+            "options": [
+              "Apple",
+              "Microsoft",
+              "Atari",
+              "Commodore"
+            ]
+          },
+          "time_taken_seconds": 3,
+          "choices_selected": [
+            "Apple"
+          ],
+          "user_attended_details": {
+            "is_correct": true,
+            "correct_choice": [
+              "Apple"
+            ]
+          }
         }
-    ]
-    
+      ],
+      "final_score": {
+        "isAttendedAll": true,
+        "final_score_percent": 40
+      },
+      "id": 2
+    }
+  ]
 }

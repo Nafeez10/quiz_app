@@ -1,7 +1,61 @@
+import { useDispatch, useSelector } from "react-redux"
 import { guageSvg } from "../assets"
 import QuizPlayWrapper from "./QuizPlayWrapper"
+import { clearAllResultsData, getQuizResults } from "../slices/quizResultsSlice"
+import { DispatchType } from "../store/store"
+import { clearAllQuestionData } from "../slices/questionsSlice"
+import { clearAllQaInfoData } from "../slices/quizQaInfoPostSlice"
+import { changeAppState } from "../slices/appStateSlice"
 
 const FinalResult = () =>{
+
+    const dispatch = useDispatch<DispatchType>();
+
+    const finalResultArr = useSelector(getQuizResults);
+
+    let correctAnswers = 0;
+    let finalResultPercent = 0;
+    let inCorrectAnswers = 0;
+
+    finalResultArr.forEach( result =>{
+        if(result){
+            correctAnswers++;
+            finalResultPercent = finalResultPercent + 20;
+        }else{
+            inCorrectAnswers++;
+        }
+    })
+
+    const inCorrectAnswersElement = (
+        <div className=" bg-red-100 flex items-center gap-5 px-5 py-6 rounded-lg">
+            <span className=" block bg-red-400 w-4 h-4 rounded-full"></span>
+            <p>
+                {inCorrectAnswers}
+            </p>
+            <p className=" text-slate-400">
+                InCorrect
+            </p>
+        </div>
+    )
+
+    const correctAnswersElement = (
+        <div className=" bg-green-100 flex items-center gap-5 px-5 py-6 rounded-lg">
+            <span className=" block bg-green-400 w-4 h-4 rounded-full"></span>
+            <p>
+                {correctAnswers}
+            </p>
+            <p className=" text-slate-400">
+                Correct
+            </p>
+        </div>
+    )
+
+    const startAgainHandeler = () =>{
+        dispatch(clearAllQuestionData());
+        dispatch(clearAllQaInfoData());
+        dispatch(clearAllResultsData());
+        dispatch(changeAppState('idle'));   
+    }
 
     return(
         <>
@@ -14,34 +68,22 @@ const FinalResult = () =>{
                                 <img className=" w-full" src={guageSvg} alt="" />
                                 <div className=" flex justify-center items-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full w-[65px] h-[65px] bg-white">
                                     <h3 className=" text-xl font-extrabold">
-                                        60%
+                                        {finalResultPercent}%
                                     </h3>
                                 </div>
                             </div>
                         </div>
-                        <div className=" flex flex-col gap-5">
-                            <div className=" bg-green-100 flex items-center gap-5 px-5 py-6 rounded-lg">
-                                <span className=" block bg-green-400 w-4 h-4 rounded-full"></span>
-                                <p>
-                                    3
-                                </p>
-                                <p className=" text-slate-400">
-                                    Correct
-                                </p>
-                            </div>
-                            <div className=" bg-red-100 flex items-center gap-5 px-5 py-6 rounded-lg">
-                                <span className=" block bg-red-400 w-4 h-4 rounded-full"></span>
-                                <p>
-                                    2
-                                </p>
-                                <p className=" text-slate-400">
-                                    Correct
-                                </p>
-                            </div>
+                        <div className=" flex flex-col gap-5 scroll-hidden overflow-y-auto">
+                            {
+                                correctAnswers ? correctAnswersElement : <></>
+                            }
+                            {
+                                inCorrectAnswers ? inCorrectAnswersElement : <></>
+                            }
                         </div>
                     </div>
                     <div className=" mb-10">
-                        <button className=" main-btn">
+                        <button onClick={startAgainHandeler} className=" main-btn">
                             Start Again
                         </button>
                     </div>
