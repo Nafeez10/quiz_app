@@ -137,5 +137,6 @@ export const { clearAllQaInfoData } = quizQaInfoPostSlice.actions;
 
 export const getCurrentQuizId = (state:RootState) => state.quizQaPost.quizId; 
 export const getPrevResponseData = (state:RootState) => state.quizQaPost.quizResponseData;  
+export const getQaPostStatus = (state:RootState) => state.quizQaPost.status;
 
 export default quizQaInfoPostSlice.reducer;

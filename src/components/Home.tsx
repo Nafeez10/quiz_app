@@ -26,6 +26,8 @@ const Home = () =>{
         }
     }
 
+    const canStart = questionsIsLoading == 'loading' ? true : false;
+
     // const simp ='top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute'
 
     return(
@@ -38,7 +40,7 @@ const Home = () =>{
                     <h2 className=" text-[#FF3B3F] text-4xl font-bold tracking-wide">Quiz</h2>
                 </div>
                 <div className="w-full px-10 mb-5">
-                    <button onClick={quizStartHandeler} className="main-btn">
+                    <button disabled={canStart} onClick={quizStartHandeler} className="main-btn disabled:brightness-75">
                         {
                             questionsIsLoading == "loading" ? "Loading..." : "Start"
                         }

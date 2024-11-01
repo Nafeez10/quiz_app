@@ -4,7 +4,7 @@ import useTimer from "../hooks/useTimer";
 import { useDispatch, useSelector } from "react-redux";
 // import { getQuizResultsStatus } from "../slices/quizResultsSlice";
 import toast from "react-hot-toast";
-import { getCurrentQuizId, getPrevResponseData, questionResponseType, quizPostPayloadType, quizQaPostData, quizQuestionType, scoreType } from "../slices/quizQaInfoPostSlice";
+import { getCurrentQuizId, getPrevResponseData, getQaPostStatus, questionResponseType, quizPostPayloadType, quizQaPostData, quizQuestionType, scoreType } from "../slices/quizQaInfoPostSlice";
 import { DispatchType } from "../store/store";
 import { changeAppState, getAppState } from "../slices/appStateSlice";
 import { addResult, getQuizResults } from "../slices/quizResultsSlice";
@@ -31,6 +31,7 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
 
     const currentQuizId = useSelector(getCurrentQuizId);
     const prevQaResponse = useSelector(getPrevResponseData);
+    const qaPostStatus = useSelector(getQaPostStatus);
 
     const [ currentQuestion, setCurrentQuestion ] = useState<questionsType>(questions[0]);
     const [ qaOptions, setQaOptions ] = useState<tempType[]>([]);
@@ -204,6 +205,8 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
 
     // console.log(isAnswerCorrect, "is correct")
 
+    const canHitNext = qaPostStatus == "loading" ? true : false;
+
     return(
         <>
             <div className="pt-14 mx-auto px-5 flex flex-col h-full ">
@@ -221,9 +224,10 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, quizQaResponseData,
                     }
                 </div>
                 <div className="">
-                    <button onClick={nextBtnHandeler} className="main-btn my-4 ">
+                    <button disabled={canHitNext} onClick={nextBtnHandeler} className="main-btn my-4 disabled:brightness-75 ">
                         {
-                            currentQaNo == 5 ? "Submit" : "Next"
+                            // currentQaNo == 5 ? "Submit" : "Next"
+                            qaPostStatus == "loading" ? "Loading..." : currentQaNo == 5 ? "Submit" : "Next"
                         }
                     </button>
                 </div>

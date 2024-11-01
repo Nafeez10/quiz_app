@@ -60,7 +60,7 @@ const FinalResult = () =>{
     return(
         <>
             <QuizPlayWrapper>
-                <div className="px-10 nunito-font text-black flex flex-col justify-between border-2 h-full">
+                <div className="px-10 overflow-y-auto scroll-hidden nunito-font text-black flex flex-col justify-between border-2 h-full">
                     <div>
                         <h2 className="mt-10 text-2xl tracking-wide text-center">Your Result</h2>
                         <div className="">
@@ -82,7 +82,7 @@ const FinalResult = () =>{
                             }
                         </div>
                     </div>
-                    <div className=" mb-10">
+                    <div className="pb-5 mt-5">
                         <button onClick={startAgainHandeler} className=" main-btn">
                             Start Again
                         </button>
