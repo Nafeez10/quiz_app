@@ -6,7 +6,7 @@ Steps to run the web app.
 
 2. - You need to run the json-server in your local machine to run the api on you local machine using this command -- " npx json-server@0.16.3 -p 4500 -w data/data.json "
 
-3. And then run the app using " npm run dev " or you can visit the website where the app is deployed in which is -- " https://quiz-app-6c18e.web.app/ "
+3. - And then run the app using " npm run dev " or you can visit the website where the app is deployed in which is -- " https://quiz-app-6c18e.web.app/ "
 
 Note: You should run the json-server in your local machine even if you are visiting the deployed site. because the api will be running on your local machine, you can see the data of the api in the data/data.json file.
 
