@@ -1,4 +1,4 @@
-import logo from './upraised_logo.png';
+import logo from './main_logo.png';
 import celebrateSvg from './celebrate.png';
 import guageSvg from './guage.png';
 

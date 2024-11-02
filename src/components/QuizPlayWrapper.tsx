@@ -5,6 +5,8 @@ type propsType = {
     children: ReactNode
 }
 
+// This is a wrapper component which is used in both FinalResults component and QuizQa component
+// Because both component's base style looks the same.
 const QuizPlayWrapper = ({children}:propsType) =>{
 
     return(

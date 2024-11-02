@@ -13,11 +13,14 @@ const Home = () =>{
 
     const quizStartHandeler = async() =>{
         try{
+            // This makes the request to the api and fetches the questions for the quiz.
             await dispatch(questionsData()).unwrap();
+
+            // This updates the app state to playing.
             dispatch(changeAppState('playing'));
         }catch{
             toast(
-                "Something went wrong!",
+                "Something went wrong!, Don't Forget to run json-server to run the api on your local machine.",
                 {
                   duration: 2000,
                 }

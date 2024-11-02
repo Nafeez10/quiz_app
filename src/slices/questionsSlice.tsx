@@ -2,12 +2,15 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import axiosApi from "../axiosApi/axiosApi";
 
+// This async thunk action is to make the request to the api to fetch the data
+// with the list of questions.
 export const questionsData = createAsyncThunk("questions/questionsData",async()=>{
     const respons = await axiosApi.get('/questions');
     const data:questionsType[] = await respons.data;
     return data;
 })
 
+// This is the type of an single question.
 export type questionsType = {
     id: number,
     type: string,
@@ -36,6 +39,7 @@ const questionsSlice = createSlice({
     name:"questions",
     initialState,
     reducers:{
+        // This reducer action is to reset all the data to begin the quiz from the start.
         clearAllQuestionData(state){
             state.isError = ''
             state.questions = []

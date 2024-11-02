@@ -5,15 +5,20 @@ import { RootState } from "../store/store";
 
 export type quizPostPayloadType = {
     quizQaNo: number;
-    payloadData: quizQuestionType;
+    payloadData: quizQuestionsType;
     quizId?:string;
     questionLength:number
 }
 
-type quizQaPostPayloadData = quizQuestionType & {
+// This is the type of the an single quiz data attempted by an user in the api.
+type quizQaPostPayloadData = quizQuestionsType & {
     id:string;
 }
 
+// This async thunk action is to make an request to the api to update the api with the
+// question the user just attempted.
+// This async thunk action consists of all the logic to make the request according to
+// next  button request and the submit button request.
 export const quizQaPostData = createAsyncThunk("quizQaPost/quizQaPostData", async (payload:quizPostPayloadType)=>{
     const quizQaNo = payload.quizQaNo;
     const payloadData = payload.payloadData;
@@ -51,7 +56,7 @@ export type scoreType = {
     isAttendedAll: boolean
 }
 
-export type quizQuestionType = {
+export type quizQuestionsType = {
     question_response: questionResponseType[],
     final_score: scoreType
 }
@@ -89,6 +94,7 @@ const quizQaInfoPostSlice = createSlice({
     name: "quizQaPost",
     initialState,
     reducers:{
+        // This reducer action is to reset all the data to begin the quiz from the start.
         clearAllQaInfoData(state){
             state.isError = ''
             state.quizId = ''
@@ -101,7 +107,7 @@ const quizQaInfoPostSlice = createSlice({
             .addCase(quizQaPostData.fulfilled, (state, action:PayloadAction<quizQaPostPayloadData>)=>{
                 state.isError = '';
                 state.status = 'fulfilled';
-                
+
                 const payload = action.payload;
                 
                 const currentQuizId = payload.id;

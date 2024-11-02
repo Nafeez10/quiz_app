@@ -11,13 +11,19 @@ const FinalResult = () =>{
 
     const dispatch = useDispatch<DispatchType>();
 
+    // This is the array of boolean to calculate the no. of questions answered corredctly.
     const finalResultArr = useSelector(getQuizResults);
+
+    // This is the final score of the quiz.
     const quizFinalScorePercent = useSelector(getQuizFinalScorePercent);
 
+    
     let correctAnswers = 0;
     
     let inCorrectAnswers = 0;
 
+    // This loop is to find the no. of correct answers and incorrect answers
+    // and will increment the variables above.
     finalResultArr.forEach( result =>{
         if(result){
             correctAnswers++;
@@ -51,6 +57,7 @@ const FinalResult = () =>{
         </div>
     )
 
+    // This function reset all the states and begin the quiz from the start.
     const startAgainHandeler = () =>{
         dispatch(clearAllQuestionData());
         dispatch(clearAllQaInfoData());
@@ -59,7 +66,9 @@ const FinalResult = () =>{
     }
 
     return(
-        <>
+        <>  
+            {/* This is a wrapper component which is used in both FinalResults component and QuizQa component
+            Because both components base style looks the same. */}
             <QuizPlayWrapper>
                 <div className="px-10 overflow-y-auto scroll-hidden nunito-font text-black flex flex-col justify-between h-full">
                     <div>
