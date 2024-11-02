@@ -12,7 +12,7 @@ const QaInfo = ({currentQaNo, questionsLength}:propsType) =>{
         <>
             <div className=" bg-white rounded-full p-2 absolute top-0 left-[50%] translate-y-[-50%] translate-x-[-50%]">
                 {/* The below type error is from the Daisy-UI radial progress component to avoid that i used ts-ignore
-                    because it has nothing to do with the app type errors and logics */}
+                    because it has nothing to do with the app's type safety and logics */}
                 {/* @ts-ignore */}
                 <div className="radial-progress relative text-green-400 transition" style={{ "--value": qaAttemptedPercent }} role="progressbar">
                     <div className=" flex justify-center items-center absolute w-full h-full bg-white rounded-full -z-10 border-slate-100 border-8">

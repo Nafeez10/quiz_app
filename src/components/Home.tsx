@@ -28,6 +28,7 @@ const Home = () =>{
         }
     }
 
+    // This is to disable the button if the questions are being fetched from the api.
     const canStart = questionsIsLoading == 'loading' ? true : false;
 
     return(

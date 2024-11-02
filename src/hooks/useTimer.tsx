@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-// This is a custom hook, i created this to track the no. of seconds the user takes
+// This is a custom hook, i created this to track the no. of seconds the user taken
 // to attempt a single question, i set the dependent prop can be any because
 // to make this custom hook reusable with any type of state.
 const useTimer = (dependent:any) =>{

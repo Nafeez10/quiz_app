@@ -35,11 +35,11 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
     const [ qaOptions, setQaOptions ] = useState<currentOptionsType[]>([]);
     const [ selectedOptions, setSelectedOptions ] = useState<string[]>([]);
 
-    // This is a custom hook to get the time taken for singles question when
-    // the question changes the timer also reset and begin from 0.
+    // This is a custom hook to get the time taken for a single question, when
+    // the question changes the timer also resets and begin from 0.
     const timeTaken = useTimer(currentQaNo);
 
-    // This will change the question when the user clicks next.
+    // This useEffect will change the question when the user clicks next.
     useEffect(()=>{
         if(currentQaNo > 1){
             setCurrentQuestion(questions[currentQaNo - 1])
@@ -79,7 +79,7 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
 
         // This will check the selected options array length and the correct answer
         // array length if the length is not matched it will return false if it matches 
-        // then this will enter the if condition to check whether the selected options
+        // then this it will enter the if condition to check whether the selected options
         // are correct or wrong.
         if(selectedOptions.length == correctAnswerOptions.length){
 
@@ -102,11 +102,11 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
                 
                 isCorrect = true;
 
-            }else{
+            } else{
                 
                 isCorrect = false;
             }
-        }else{
+        } else{
             
             isCorrect = false
         }
@@ -130,7 +130,7 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
     const finalScoreHandeler = (isAnswerCorrect:boolean) =>{
         let finalScore = 0;
 
-        //  Here it checks the question is the final question or not, if it
+        // Here it checks the question is the final question or not, if it
         // is the final question it enters the if statement.
         if(currentQaNo == questionLength){
             // Here it calculates the percent for the single correct question.
@@ -140,14 +140,13 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
             // answered correctly.
             allQaResults.forEach( result =>{
                 if(result){
-                    
                     finalScore = finalScore + singleQaPercent;
                 }
             })
 
             // This is becuase the correct answers boolean array will only be dispatched
             // if the api makes an successfull request so the final question value will not be in
-            // the array of this particular time, so to update the score for the final question, this is done here.
+            // the array at this particular time, so to update the score for the final question, this is done here.
             finalScore = isAnswerCorrect ? finalScore + singleQaPercent : finalScore;
         }
         
@@ -156,7 +155,7 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
 
     // This is the Next button handeler.
     const nextBtnHandeler = async () =>{
-        // This toast will be shown if the user have'nt selected a single option.
+        // This toast will be shown if the user haven't selected a single option.
         if(!selectedOptions.length){
             toast(
                 "Select atleast one option",
@@ -168,13 +167,13 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
             return;
         }
 
-        // This will check the answer is correct for the current question.
+        // This will check whether the answer is correct for the current question.
         const isAnswerCorrect = checkIsAnswerCorrectHandeler();
         
         const correctAnswerOptions = currentQuestion.correct_answer;
 
         // This is the object of a single question's data in the question_response property 
-        // to be updated to the api for an single quiz
+        // to be updated to the api for an single quiz.
         const currentQaData:questionResponseType = {
             question_no: currentQaNo,
             quiz_question_data: currentQuestion,

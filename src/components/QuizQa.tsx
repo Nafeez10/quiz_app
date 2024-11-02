@@ -15,7 +15,7 @@ const QuizQa = () =>{
     return(
         <>
             {/* This is a wrapper component which is used in both FinalResults component and QuizQa component
-            Because both components base style looks the same. */}
+            Because both component's base style looks the same. */}
             <QuizPlayWrapper>
                 <div className="h-full w-full bo rder-2 bor der-black relative">
                     <QaInfo

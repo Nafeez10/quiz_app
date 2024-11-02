@@ -18,7 +18,7 @@ const quizResultsSlice = createSlice({
     initialState,
     reducers:{
         // This reducer actioin adds the boolean value to the array of quizResults,
-        // Indicating whether the attempted questions are correct or incorrect.
+        // Indicating whether the attempted questions are correct or wrong.
         addResult(state, action){
             state.quizResults.push(action.payload);
         },

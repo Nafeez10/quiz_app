@@ -18,7 +18,7 @@ type quizQaPostPayloadData = quizQuestionsType & {
 // This async thunk action is to make an request to the api to update the api with the
 // question the user just attempted.
 // This async thunk action consists of all the logic to make the request according to
-// next  button request and the submit button request.
+// next button request and the submit button request.
 export const quizQaPostData = createAsyncThunk("quizQaPost/quizQaPostData", async (payload:quizPostPayloadType)=>{
     const quizQaNo = payload.quizQaNo;
     const payloadData = payload.payloadData;

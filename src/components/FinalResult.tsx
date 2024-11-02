@@ -68,7 +68,7 @@ const FinalResult = () =>{
     return(
         <>  
             {/* This is a wrapper component which is used in both FinalResults component and QuizQa component
-            Because both components base style looks the same. */}
+            Because both component's base style looks the same. */}
             <QuizPlayWrapper>
                 <div className="px-10 overflow-y-auto scroll-hidden nunito-font text-black flex flex-col justify-between h-full">
                     <div>
