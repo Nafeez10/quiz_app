@@ -1,10 +1,9 @@
 type propsType = {
     questionsLength:number;
     currentQaNo:number;
-    setCurrentQaNo :React.Dispatch<React.SetStateAction<number>>;
 }
 
-const QaInfo = ({currentQaNo, setCurrentQaNo, questionsLength}:propsType) =>{
+const QaInfo = ({currentQaNo, questionsLength}:propsType) =>{
 
     const qaAttemptedPercent = Math.round((currentQaNo / questionsLength ) * 100);
 

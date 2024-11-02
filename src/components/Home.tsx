@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { appStateType } from "../App";
 import { logo } from "../assets";
 import { DispatchType } from "../store/store";
 import { getQuestionsStatus, questionsData } from "../slices/questionsSlice";
@@ -14,7 +13,7 @@ const Home = () =>{
 
     const quizStartHandeler = async() =>{
         try{
-            const response = await dispatch(questionsData()).unwrap();
+            await dispatch(questionsData()).unwrap();
             dispatch(changeAppState('playing'));
         }catch{
             toast(
@@ -27,8 +26,6 @@ const Home = () =>{
     }
 
     const canStart = questionsIsLoading == 'loading' ? true : false;
-
-    // const simp ='top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute'
 
     return(
         <>

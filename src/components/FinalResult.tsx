@@ -15,13 +15,13 @@ const FinalResult = () =>{
     const quizFinalScorePercent = useSelector(getQuizFinalScorePercent);
 
     let correctAnswers = 0;
-    // let finalResultPercent = 0;
+    
     let inCorrectAnswers = 0;
 
     finalResultArr.forEach( result =>{
         if(result){
             correctAnswers++;
-            // finalResultPercent = finalResultPercent + 20;
+           
         }else{
             inCorrectAnswers++;
         }

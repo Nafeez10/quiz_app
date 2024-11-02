@@ -2,19 +2,16 @@ import { useEffect, useState } from "react";
 import { questionsType } from "../slices/questionsSlice";
 import useTimer from "../hooks/useTimer";
 import { useDispatch, useSelector } from "react-redux";
-// import { getQuizResultsStatus } from "../slices/quizResultsSlice";
 import toast from "react-hot-toast";
 import { getCurrentQuizId, getPrevResponseData, getQaPostStatus, questionResponseType, quizPostPayloadType, quizQaPostData, quizQuestionType, scoreType } from "../slices/quizQaInfoPostSlice";
 import { DispatchType } from "../store/store";
-import { changeAppState, getAppState } from "../slices/appStateSlice";
+import { changeAppState } from "../slices/appStateSlice";
 import { addResult, getQuizResults, setQuizFinalScore } from "../slices/quizResultsSlice";
 
 type propsType = {
     questions: questionsType[];
     currentQaNo: number;
     setCurrentQaNo: React.Dispatch<React.SetStateAction<number>>;
-    quizQaResponseData: boolean[];
-    setQuizQaResponseData:React.Dispatch<React.SetStateAction<boolean[]>>;
     questionLength:number
 }
 
@@ -24,7 +21,7 @@ type tempType = {
     checked: boolean;
 }
 
-const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  quizQaResponseData, setQuizQaResponseData}:propsType) =>{
+const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:propsType) =>{
 
     const dispatch = useDispatch<DispatchType>();
 
@@ -37,8 +34,6 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
     const [ currentQuestion, setCurrentQuestion ] = useState<questionsType>(questions[0]);
     const [ qaOptions, setQaOptions ] = useState<tempType[]>([]);
     const [ selectedOptions, setSelectedOptions ] = useState<string[]>([]);
-    // const quizTaken = useSelector(getQuizResultsQuizTaken);
-    // const quizTakenStatus = useSelector(getQuizResultsStatus);
 
     const timeTaken = useTimer(currentQaNo);
 
@@ -58,8 +53,6 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
 
         setQaOptions(temp);
 
-        // console.log(temp)
-
     },[currentQuestion])
 
     useEffect(()=>{
@@ -68,13 +61,12 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
                 .map( option => option.option);
                 
         setSelectedOptions(tempSelected);
-        // console.log(selectedOptions)
     },[qaOptions])
 
     const checkIsAnswerCorrectHandeler = () =>{
         let isCorrect = false;
         const correctAnswerOptions = currentQuestion.correct_answer;
-        // console.log(correctAnswerOptions.length)
+
         if(selectedOptions.length == correctAnswerOptions.length){
             const checkIsCorrectArray = selectedOptions.map( option =>{
                 if(correctAnswerOptions.includes(option)){
@@ -88,15 +80,15 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
             const checkIsCorrect = checkIsCorrectArray.every( option => option == true);
 
             if(checkIsCorrect){
-                // setIsAnswerCorrect(true);
+                
                 isCorrect = true;
-                console.log(true,"mmm")
+
             }else{
-                // setIsAnswerCorrect(false);
+                
                 isCorrect = false;
             }
         }else{
-            // setIsAnswerCorrect(false);
+            
             isCorrect = false
         }
 
@@ -109,8 +101,6 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
             checked: !option.checked
         } : option );
 
-        // checkIsAnswerCorrectHandeler();
-
         setQaOptions(temp);
     }
 
@@ -118,11 +108,10 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
         let finalScore = 0;
         if(currentQaNo == questionLength){
             const singleQaPercent = parseFloat(((1 / questionLength ) * 100).toFixed(2));
-            console.log((1 / questionLength ) * 100,singleQaPercent,"heyy");
 
             allQaResults.forEach( result =>{
                 if(result){
-                    // const temp = Math.round((currentQaNo / questionLength ) * 100);
+                    
                     finalScore = finalScore + singleQaPercent;
                 }
             })
@@ -145,7 +134,6 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
         }
 
         const isAnswerCorrect = checkIsAnswerCorrectHandeler();
-        console.log(isAnswerCorrect);
         
         const correctAnswerOptions = currentQuestion.correct_answer;
 
@@ -170,7 +158,6 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
         } 
 
         const payloadData:quizQuestionType = {
-            // id: currentQaNo,
             question_response:questionData,
             final_score: finalScore
         }
@@ -183,17 +170,13 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
         }
 
         try {
-            const response = await dispatch(quizQaPostData(payload)).unwrap();
-            // setQuizQaResponseData([
-            //     ...quizQaResponseData, isAnswerCorrect
-            // ])
+            await dispatch(quizQaPostData(payload)).unwrap();
 
             dispatch(addResult(isAnswerCorrect));
 
             if( currentQaNo < questionLength){
                 setCurrentQaNo(currentQaNo + 1);
-                console.log(payload);
-                console.log(currentQaNo)
+                
             }else{
                 dispatch(changeAppState('finished'));
 
@@ -213,13 +196,9 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
 
     }
 
-    // console.log(isAnswerCorrect, "is correct")
+    
 
     const canHitNext = qaPostStatus == "loading" ? true : false;
-
-    // const questionImageElement = (
-    //     <img className="w-[50%] mx-auto mb-5 rounded-md" src={currentQuestion.imageUrl} alt="" />
-    // )
 
     return(
         <>
@@ -249,7 +228,6 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength,  qu
                 <div className="">
                     <button disabled={canHitNext} onClick={nextBtnHandeler} className="main-btn my-4 disabled:brightness-75 ">
                         {
-                            // currentQaNo == 5 ? "Submit" : "Next"
                             qaPostStatus == "loading" ? "Loading..." : currentQaNo == questionLength ? "Submit" : "Next"
                         }
                     </button>

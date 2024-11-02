@@ -2,17 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import axiosApi from "../axiosApi/axiosApi";
 
-// type qaType = {
-//     id: number;
-//     category: string;
-//     correct_answer: string[];
-//     difficulty: string;
-//     incorrect_answer: string[];
-//     options: string[];
-//     question: string;
-//     type: string;
-// }
-
 export const questionsData = createAsyncThunk("questions/questionsData",async()=>{
     const respons = await axiosApi.get('/questions');
     const data:questionsType[] = await respons.data;
@@ -60,11 +49,11 @@ const questionsSlice = createSlice({
                 state.status = 'fulfilled'
                 state.questions = action.payload
             })
-            .addCase(questionsData.rejected, (state, action)=>{
+            .addCase(questionsData.rejected, (state)=>{
                 state.isError = 'Error Occured'
                 state.status = 'rejected'
             })
-            .addCase(questionsData.pending, (state, action)=>{
+            .addCase(questionsData.pending, (state)=>{
                 state.isError = ''
                 state.status = 'loading'
             })
