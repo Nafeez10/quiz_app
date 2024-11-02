@@ -4,7 +4,7 @@ Steps to run the web app.
 
 1. - First, you need to install all the packages for the webapp which are used to develop the app,  using this command -- " npm i " or " npm install "
 
-2. - You need to run the json-server in your local machine to run the api on you local machine using this command -- " npx json-server@0.16.3 -p 4500 -w data/data.json "
+2. - You need to run the json-server in your local machine to run the api on you local machine,note: This command should be executed inside the quiz app folder because the -w in the command indicates where the json file for the api is present. run the api using this command -- " npx json-server@0.16.3 -p 4500 -w data/data.json "
 
 3. - And then run the app using " npm run dev " or you can visit the website where the app is deployed in which is -- " https://quiz-app-6c18e.web.app/ "
 
