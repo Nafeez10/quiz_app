@@ -1,50 +1,18 @@
-# React + TypeScript + Vite
+Quiz App - Developed By Mohamed Nafees.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Steps to run the web app.
 
-Currently, two official plugins are available:
+1. - First, you need to install the packages for the webapp which are used to develop the app,  using this command -- " npm i " 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. - You need to run the json-server in your local machine to run the api on you local machine using this command -- " npx json-server@0.16.3 -p 4500 -w data/data.json "
 
-## Expanding the ESLint configuration
+3. And then run the app using " npm run dev " or you can visit the website where the app is deployed in which is -- " https://quiz-app-6c18e.web.app/ "
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Note: You should run the json-server in your local machine even if you are visiting the deployed site. because the api will be running on your local machine, you can see the data of the api in the data/data.json file.
 
-- Configure the top-level `parserOptions` property like this:
+Note: I used the version 0.16.3 of the json-server becuase in that version the api genreates the id in numbers instead of string, and there is nothing to do with that in this project but still i usually use this particular version that's why i used it.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Note: The -p in the command indicates the port number where the api should run if you change the port number in the command you should also need to change the same port number in the baseUrl in the axiosApi baseUrl which is in src/axiosApi/axiosApi.tsx.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Note: The json-server command is -- npx json-server@0.16.3 -p 4500 -w data/data.json
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
