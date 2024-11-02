@@ -2,7 +2,7 @@ Quiz App - Developed By Mohamed Nafees.
 
 Steps to run the web app.
 
-1. - First, you need to install the packages for the webapp which are used to develop the app,  using this command -- " npm i " 
+1. - First, you need to install the packages for the webapp which are used to develop the app,  using this command -- " npm i " or " npm install "
 
 2. - You need to run the json-server in your local machine to run the api on you local machine using this command -- " npx json-server@0.16.3 -p 4500 -w data/data.json "
 
