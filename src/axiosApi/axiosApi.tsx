@@ -5,5 +5,5 @@ import axios from "axios";
 // running on port 4500.
 
 export default axios.create({
-    baseURL:'https://quizapp.free.beeceptor.com'
+    baseURL:'http://localhost:4500'
 })

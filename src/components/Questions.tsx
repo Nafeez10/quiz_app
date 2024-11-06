@@ -259,8 +259,8 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
                     <div className=" flex flex-col gap-5 flex-grow">
                         {
                             qaOptions.map( option =>(
-                                <div key={option.id} className={` option ${option.checked ? "option-s" : "option-n-s"} `}>
-                                    <input checked={option.checked} onChange={()=>checkHandeler(option.id)} className=" checkbox-success [--chkbg:#41da6a] [--chkfg:white] checkbox bord er-2 border-neutral-400 rounded-full" type="checkbox" />
+                                <div onClick={()=>checkHandeler(option.id)} key={option.id} className={` option cursor-pointer ${option.checked ? "option-s" : "option-n-s"} `}>
+                                    <input checked={option.checked} className=" checkbox-success [--chkbg:#41da6a] [--chkfg:white] checkbox bord er-2 border-neutral-400 rounded-full" type="checkbox" />
                                     <p>{option.option}</p>
                                 </div>
                             ))
