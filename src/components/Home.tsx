@@ -22,7 +22,7 @@ const Home = () =>{
             toast(
                 "Something went wrong!, Don't Forget to run json-server to run the api on your local machine.",
                 {
-                  duration: 2000,
+                  duration: 4000,
                 }
             );
         }

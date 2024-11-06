@@ -7,6 +7,7 @@ import { getCurrentQuizId, getPrevResponseData, getQaPostStatus, questionRespons
 import { DispatchType } from "../store/store";
 import { changeAppState } from "../slices/appStateSlice";
 import { addResult, getQuizResults, setQuizFinalScore } from "../slices/quizResultsSlice";
+import { rightArrowSvg } from "../assets";
 
 type propsType = {
     questions: questionsType[];
@@ -268,10 +269,13 @@ const Questions = ({ questions, currentQaNo, setCurrentQaNo, questionLength }:pr
                 </div>
                 
                 <div className="">
-                    <button disabled={canHitNext} onClick={nextBtnHandeler} className="main-btn my-4 disabled:brightness-75 ">
-                        {
-                            qaPostStatus == "loading" ? "Loading..." : currentQaNo == questionLength ? "Submit" : "Next"
-                        }
+                    <button disabled={canHitNext} onClick={nextBtnHandeler} className="main-btn my-4 disabled:brightness-75 relative ">
+                        <img className="w-4 absolute right-0 mr-5 top-[50%] translate-y-[-50%]" src={rightArrowSvg} alt="" />
+                        <span>
+                            {
+                                qaPostStatus == "loading" ? "Loading..." : currentQaNo == questionLength ? "Submit" : "Next"
+                            }
+                        </span>
                     </button>
                 </div>
             </div>
